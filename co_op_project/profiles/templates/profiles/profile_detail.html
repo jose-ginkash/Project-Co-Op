@@ -1,0 +1,19 @@
+<!-- profiles/templates/profiles/profile_detail.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ profile.user.username }}'s Profile</title>
+</head>
+<body>
+    <h1>{{ profile.user.username }}'s Profile</h1>
+    {% if profile.avatar %}
+        <img src="{{ profile.avatar.url }}" alt="Avatar" width="150">
+    {% else %}
+        <p>No profile picture uploaded.</p>
+    {% endif %}
+    <p><strong>Bio:</strong> {{ profile.bio }}</p>
+    <p><strong>Gaming Interests:</strong> {{ profile.gaming_interests }}</p>
+    <p><strong>Phone Number:</strong> {{ profile.phone_number }}</p>
+    <a href="{% url 'profile-update' profile.pk %}">Edit Profile</a>
+</body>
+</html>
