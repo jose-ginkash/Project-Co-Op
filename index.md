@@ -5,9 +5,9 @@ A dating app built exclusively for **gamers and geeks** to connect based on shar
 ---
 
 ## 🚀 Features  
-✔️ **Match Based on Interests** – Connect with others who love the same games and anime. 
-✔️ **Virtual Date Coordination** – Plan game nights and online hangouts using Discord.  
-✔️ **Custom Profiles** – Showcase your favorite games, anime, and more.  
+- ✔️ **Match Based on Interests** – Connect with others who love the same games and anime.  
+- ✔️ **Virtual Date Coordination** – Plan game nights and online hangouts using Discord.  
+- ✔️ **Custom Profiles** – Showcase your favorite games, anime, and more.  
 
 ---
 
