@@ -1,0 +1,7 @@
+//These are the links 
+
+http://localhost/phpmyadmin
+http://localhost/loveconnect/login.php
+
+//open loveconnect_db and copy all command and drop it in SQL in php admin
+//Open the loveconnect/login.php register and sign
