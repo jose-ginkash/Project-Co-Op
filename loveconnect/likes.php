@@ -9,13 +9,19 @@ $db = "loveconnect";
 $user = "root";
 $pass = "";
 
+
+
 $conn = new mysqli($host, $user, $pass, $db);
 if ($conn->connect_error) {
   exit("DB connection error.");
 }
 
 $sender = $_SESSION['username'];
-$receiver = $_POST['receiver'];
+$receiver = $_POST['receiver'] ?? '';
+
+if ($receiver === '') {
+  exit("Missing receiver.");
+}
 
 $conn->query("INSERT INTO likes (sender, receiver) VALUES ('$sender', '$receiver')");
 
