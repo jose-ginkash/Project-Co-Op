@@ -3,5 +3,7 @@
 http://localhost/phpmyadmin
 http://localhost/loveconnect/login.php
 
+
+//Click on new and add create adatabase called loveconnect.db
 //open loveconnect_db and copy all command and drop it in SQL in php admin
 //Open the loveconnect/login.php register and sign
