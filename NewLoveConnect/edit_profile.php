@@ -44,6 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Edit Profile</title>
     <link rel="stylesheet" href="style.css">
@@ -54,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             padding: 30px;
             background: #f9f9f9;
             border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         form div {
@@ -67,8 +68,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             margin-bottom: 5px;
         }
 
-        input, textarea {
-            width: 100%;
+        input,
+        textarea {
+            width: 90%;
             padding: 10px;
             border-radius: 6px;
             border: 1px solid #ccc;
@@ -97,51 +99,53 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     </style>
 </head>
+
 <body>
 
-<div class="container">
-    <h2>Edit Your Profile</h2>
-    <form method="POST" enctype="multipart/form-data">
-        <div>
-            <label>Name:</label>
-            <input type="text" name="name" value="<?php echo htmlspecialchars($name); ?>" required>
-        </div>
+    <div class="container">
+        <h2>Edit Your Profile</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <div>
+                <label>Name:</label>
+                <input type="text" name="name" value="<?php echo htmlspecialchars($name); ?>" required>
+            </div>
 
-        <div>
-            <label>Age:</label>
-            <input type="number" name="age" value="<?php echo $age; ?>" required>
-        </div>
+            <div>
+                <label>Age:</label>
+                <input type="number" name="age" value="<?php echo $age; ?>" required>
+            </div>
 
-        <div>
-            <label>Bio:</label>
-            <textarea name="bio" required><?php echo htmlspecialchars($bio); ?></textarea>
-        </div>
+            <div>
+                <label>Bio:</label>
+                <textarea name="bio" required><?php echo htmlspecialchars($bio); ?></textarea>
+            </div>
 
-        <div>
-            <label>Favorite Games:</label>
-            <input type="text" name="favorite_games" value="<?php echo htmlspecialchars($favorite_games); ?>">
-        </div>
+            <div>
+                <label>Favorite Games:</label>
+                <input type="text" name="favorite_games" value="<?php echo htmlspecialchars($favorite_games); ?>">
+            </div>
 
-        <div>
-            <label>Hobbies:</label>
-            <input type="text" name="hobbies" value="<?php echo htmlspecialchars($hobbies); ?>">
-        </div>
+            <div>
+                <label>Hobbies:</label>
+                <input type="text" name="hobbies" value="<?php echo htmlspecialchars($hobbies); ?>">
+            </div>
 
-        <div>
-            <label>Profile Picture:</label>
-            <input type="file" name="profile_pic">
-            <?php if (!empty($profile_pic)) { ?>
-                <img src="<?php echo $profile_pic; ?>" alt="Current Profile" class="preview">
-            <?php } ?>
-        </div>
+            <div>
+                <label>Profile Picture:</label>
+                <input type="file" name="profile_pic">
+                <?php if (!empty($profile_pic)) { ?>
+                    <img src="<?php echo $profile_pic; ?>" alt="Current Profile" class="preview">
+                <?php } ?>
+            </div>
 
-        <div>
-            <button type="submit">Update Profile</button>
-        </div>
-    </form>
+            <div>
+                <button type="submit">Update Profile</button>
+            </div>
+        </form>
 
-    <p style="margin-top: 20px;"><a href="home.php">← Back to Home</a></p>
-</div>
+        <p style="margin-top: 15px;"><a href="home.php">← Back to Home</a></p>
+    </div>
 
 </body>
+
 </html>
