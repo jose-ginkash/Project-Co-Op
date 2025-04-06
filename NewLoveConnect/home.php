@@ -94,92 +94,93 @@ $notif_check->close();
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Home - LoveConnect</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<!-- 🔔 Notification + Connections + Profile -->
-<div class="notification-bar">
-    <button id="notif-btn" onclick="window.location.href='notifications.php';">
-        Notifications
-    </button>
-    <button onclick="window.location.href='connections.php';">
-        Connections
-    </button>
-</div>
+    <!-- 🔔 Notification + Connections + Profile -->
+    <div class="notification-bar">
+        <button id="notif-btn" onclick="window.location.href='notifications.php';">
+            Notifications
+        </button>
+        <button onclick="window.location.href='connections.php';">
+            Connections
+        </button>
+    </div>
 
-<div class="profile-btn">
-    <a href="edit_profile.php" class="btn">My Profile</a>
-</div>
+    <div class="profile-btn">
+        <a href="edit_profile.php" class="btn">My Profile</a>
+    </div>
 
-<!-- 🔥 Main Content -->
-<div class="container">
-    <h2>Welcome to LoveConnect</h2>
+    <!-- 🔥 Main Content -->
+    <div class="container">
+        <h2>Welcome to LoveConnect</h2>
 
-    <?php if ($current_match): ?>
-        <div class="match-card">
-            <img src="<?php echo $current_match['profile_pic']; ?>" alt="Profile Picture">
-            <h3><?php echo htmlspecialchars($current_match['name']); ?> (<?php echo $current_match['age']; ?>)</h3>
-            <p><?php echo htmlspecialchars($current_match['bio']); ?></p>
+        <?php if ($current_match): ?>
+            <div class="match-card">
+                <img src="<?php echo $current_match['profile_pic']; ?>" alt="Profile Picture">
+                <h3><?php echo htmlspecialchars($current_match['name']); ?> (<?php echo $current_match['age']; ?>)</h3>
+                <p><?php echo htmlspecialchars($current_match['bio']); ?></p>
 
-            <form method="post" class="swipe-buttons">
-                <button type="submit" name="like" class="like">❤️ Like</button>
-                <button type="submit" name="pass" class="pass">❌ Pass</button>
-            </form>
+                <form method="post" class="swipe-buttons">
+                    <button type="submit" name="like" class="like">❤️ Like</button>
+                    <button type="submit" name="pass" class="pass">❌ Pass</button>
+                </form>
+            </div>
+        <?php else: ?>
+            <h3>Sorry, we were not able to match you 😢</h3>
+        <?php endif; ?>
 
-            <a href="message.php?user=<?php echo $current_match['user_id']; ?>" class="chat-button">Chat 💬</a>
-        </div>
-    <?php else: ?>
-        <h3>Sorry, we were not able to match you 😢</h3>
-    <?php endif; ?>
+        <p><a href="logout.php">Logout</a></p>
+    </div>
 
-    <p><a href="logout.php">Logout</a></p>
-</div>
+    <!-- 🔊 Notification sound & toast -->
+    <audio id="notif-sound" src="notification.mp3" preload="auto"></audio>
+    <div class="toast" id="toast">📬 New message received!</div>
 
-<!-- 🔊 Notification sound & toast -->
-<audio id="notif-sound" src="notification.mp3" preload="auto"></audio>
-<div class="toast" id="toast">📬 New message received!</div>
+    <script>
+        let lastCount = 0;
 
-<script>
-    let lastCount = 0;
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
 
-    function showToast(message) {
-        const toast = document.getElementById('toast');
-        toast.textContent = message;
-        toast.style.display = 'block';
-        setTimeout(() => {
-            toast.style.display = 'none';
-        }, 3000);
-    }
+        function checkNotifications() {
+            fetch('check_notifications.php')
+                .then(res => res.json())
+                .then(data => {
+                    const notifBtn = document.getElementById("notif-btn");
+                    const newCount = data.count;
 
-    function checkNotifications() {
-        fetch('check_notifications.php')
-            .then(res => res.json())
-            .then(data => {
-                const notifBtn = document.getElementById("notif-btn");
-                const newCount = data.count;
-
-                if (newCount > 0) {
-                    notifBtn.innerText = `Notifications 🔔 (${newCount})`;
-                    if (newCount > lastCount) {
-                        document.getElementById("notif-sound").play();
-                        showToast("📬 New message received!");
+                    if (newCount > 0) {
+                        notifBtn.innerText = `Notifications 🔔 (${newCount})`;
+                        if (newCount > lastCount) {
+                            document.getElementById("notif-sound").play();
+                            showToast("📬 New message received!");
+                        }
+                    } else {
+                        notifBtn.innerText = "Notifications";
                     }
-                } else {
-                    notifBtn.innerText = "Notifications";
-                }
 
-                lastCount = newCount;
-            });
-    }
+                    lastCount = newCount;
+                });
+        }
 
-    document.addEventListener("DOMContentLoaded", () => {
-        checkNotifications();
-        setInterval(checkNotifications, 5000);
-    });
-</script>
+        document.addEventListener("DOMContentLoaded", () => {
+            checkNotifications();
+            setInterval(checkNotifications, 5000);
+        });
+    </script>
 
 </body>
+
 </html>
